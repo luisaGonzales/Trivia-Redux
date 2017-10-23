@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from 'redux-zero/react';
 // import {} from 'Actions.js';
 import plane from "./img/plane.svg";
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
 
 const Head = ({image}) => {
   return (
@@ -24,16 +24,16 @@ const Quiz = ({questionActual}) => {
 }
 
 const Progress = ({totalAnswers, totalQuestions}) => {
-  <Row className="estado" id="progreso">
+  return (
+    <Row className="estado" id="progreso">
     <Col md={12} xs={12}>
       <div>
         {totalAnswers} de {totalQuestions} preguntas contestadas
       </div>
-      <div className="progress">
-        <div className="progress-bar" role="progressbar" aria-valuemax="100" style={{ width: {totalAnswers} * 20 + '%', height: '10px' }}></div>                                 
-      </div>
+      <ProgressBar now={{totalAnswers} * 20} />
     </Col>
   </Row>
+  );
 
 }
 
@@ -63,17 +63,17 @@ const Socials = () => {
 
 
 
-const App = ({questions, selected}) => {
+const App = ({questions, selected, answers}) => {
   return (
     <Grid className='quiz text-center'>
       <Head image={questions[0].img}/>
-      <div className="contenido">
-        <Socials />
-      </div>
+      <Progress totalAnswers={answers.length} totalQuestions={questions.length}  />
+      <Socials />
+      
     </Grid>
   );
 }
 
-const mapToProps = ({questions, selected}) => ({questions, selected});
+const mapToProps = ({questions, selected, answers}) => ({questions, selected, answers});
 
 export default connect(mapToProps)(App);

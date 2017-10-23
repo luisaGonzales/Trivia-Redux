@@ -12,7 +12,6 @@ const Index = () => {
             <App />
         </Provider>
     );
-    
 }
 
 ReactDOM.render(<Index />, document.getElementById('root'));
