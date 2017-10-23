@@ -1,0 +1,126 @@
+* {
+    font-family: 'Ubuntu', sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* Cuerpo */
+
+body {
+    background-color: #fff3ec;
+    color: #423f5c;
+}
+
+.quiz {
+    height: 95vh;
+    padding: 5vw 0;
+}
+
+.contenido {
+    margin-top: 20px;
+}
+
+.progress {
+    margin-bottom: 0 !important;
+    margin-top: 1% !important;
+}
+
+.progress-bar {
+    background-color: #423f5c !important;
+}
+
+#progreso .progress {
+    height: 6px;
+}
+
+.pregunta {
+    background-color: #fff;
+    padding: 5vw 5vw;
+    box-shadow: 0px 0px 25px #CEC3BA;
+}
+
+.titulo {
+    font-size: 1.8em;
+    margin: 3vw 1vw;
+    margin-bottom: 0;
+}
+
+.opciones {
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+
+.seleccion {
+    display: inline-block;
+    position: relative;
+    text-align: right;
+    transition: 0.5s;
+}
+
+.seleccion:after {
+    font-family: FontAwesome;
+    position: absolute;
+    opacity: 0;
+    top: -10px;
+    right: -115px;
+    transition: 0.5s;
+    content: "\f058";
+}
+
+/* .seleccionado button:after {
+    font-family: FontAwesome;
+    content: "\f08d";
+    position: absolute;
+    right: 30px;
+    top: 7px;
+} */
+
+.btn-abc:hover .seleccion {
+    padding-right: -15px;
+}
+
+.btn-abc:active .seleccion:after {
+    color: white;
+}
+
+.btn-abc:hover .seleccion:after {
+    opacity: 1;
+    right: -20px;
+}
+
+#respuestas,
+#resumen {
+    text-align: left !important;
+    padding: 5vw;
+}
+
+.twitter {
+    color: #65a2d9 !important;
+}
+
+.facebook {
+    color: #3b5998 !important;
+}
+
+.google {
+    color: #de5449 !important;
+}
+
+#redesSociales {
+    margin-top: 30px;
+    opacity: 0.5;
+    color: white;
+}
+
+#redesSociales:hover {
+    opacity: 1;
+}
+
+#anterior {
+    background-color: transparent !important;
+}
+
+#siguiente {
+    background-color: transparent !important;
+}
