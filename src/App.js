@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'redux-zero/react';
-// import {} from 'Actions.js';
 import plane from "./img/plane.svg";
 import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
 import {next} from './Actions'
@@ -86,6 +85,7 @@ const Navs = ({answers, actualQuestion }) => {
 const App = ({questions, selected, answers, actualQuestion}) => {
   
   const items = questions[actualQuestion].options.map((choise, index) => {
+    const abc = ["A", "B", "C"];
     return (
       <Row className="text-center">
         <Col md={12} className='seleccionado' >
@@ -94,7 +94,7 @@ const App = ({questions, selected, answers, actualQuestion}) => {
             id={index}
             onClick={() => next(choise)}
             >
-              {choise}
+              <span>{abc[index]}</span> {choise}
             <span className="seleccion"></span>
           </button>
         </Col>
