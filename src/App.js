@@ -4,6 +4,7 @@ import {connect} from 'redux-zero/react';
 // import {} from 'Actions.js';
 import plane from "./img/plane.svg";
 import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
+import {next} from './Actions'
 
 const Head = ({image}) => {
   return (
@@ -67,6 +68,21 @@ const Socials = () => {
   );
 }
 
+const Navs = ({answers, actualQuestion }) => {
+  return (
+    <div id="flechas" className="text-center">
+      <button id="anterior" className={{answers} >=  {actualQuestion} && {actualQuestion}?'btn':"btn disabled"}>
+            <img className="img-responsive" src='https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/navigation-left-arrow.svg' />
+      </button>
+      <button id="siguiente" className={{answers} >  {actualQuestion} ? 'btn':"btn disabled"} >
+            <img className="img-responsive" src="https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/navigation-right-arrow.svg" />
+      </button>
+    </div>
+
+  ) ;
+
+}
+
 const App = ({questions, selected, answers, actualQuestion}) => {
   
   const items = questions[actualQuestion].options.map((choise, index) => {
@@ -76,6 +92,7 @@ const App = ({questions, selected, answers, actualQuestion}) => {
           <button
             className='btn btn-block btn-abc text-center opciones'
             id={index}
+            onClick={() => next(choise)}
             >
               {choise}
             <span className="seleccion"></span>
@@ -86,7 +103,7 @@ const App = ({questions, selected, answers, actualQuestion}) => {
   })
   return (
     <Grid className='quiz text-center'>
-      <Head image={questions[0].img}/>
+      <Head image={questions[actualQuestion].img}/>
       <Progress totalAnswers={answers.length} totalQuestions={questions.length}  />
       <div className="pregunta">
         <Quiz question={questions[actualQuestion].question} options={items} />
