@@ -15,14 +15,6 @@ const Head = ({image}) => {
   );
 }
 
-const Quiz = ({questionActual}) => {
-  return (
-    <Row className=''>
-
-    </Row>
-  );
-}
-
 const Progress = ({totalAnswers, totalQuestions}) => {
   return (
     <Row className="estado" id="progreso">
@@ -34,7 +26,24 @@ const Progress = ({totalAnswers, totalQuestions}) => {
     </Col>
   </Row>
   );
+}
 
+const Quiz = ({question, options}) => {
+  return (
+    <div>
+      <Row>
+        <Col md={12}>
+          <h1 className="text-center titulo">{question}</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
+          {options}
+        </Col>      
+      </Row>
+    </div>
+    
+  );
 }
 
 const Socials = () => {
@@ -58,22 +67,37 @@ const Socials = () => {
   );
 }
 
-
-
-
-
-
-const App = ({questions, selected, answers}) => {
+const App = ({questions, selected, answers, actualQuestion}) => {
+  
+  const items = questions[actualQuestion].options.map((choise, index) => {
+    return (
+      <Row className="text-center">
+        <Col md={12} className='seleccionado' >
+          <button
+            className='btn btn-block btn-abc text-center opciones'
+            id={index}
+            >
+              {choise}
+            <span className="seleccion"></span>
+          </button>
+        </Col>
+      </Row>
+    );
+  })
   return (
     <Grid className='quiz text-center'>
       <Head image={questions[0].img}/>
       <Progress totalAnswers={answers.length} totalQuestions={questions.length}  />
-      <Socials />
+      <div className="pregunta">
+        <Quiz question={questions[actualQuestion].question} options={items} />
+        <Socials />
+      </div>
+      
       
     </Grid>
   );
 }
 
-const mapToProps = ({questions, selected, answers}) => ({questions, selected, answers});
+const mapToProps = ({questions, selected, answers, actualQuestion}) => ({questions, selected, answers, actualQuestion});
 
 export default connect(mapToProps)(App);

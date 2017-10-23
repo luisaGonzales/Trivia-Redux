@@ -47,7 +47,8 @@ let AllQuestions = [
 const initialState = {
     questions : AllQuestions,
     selected : -1,
-    answers : ["oli"]
+    answers : [],
+    actualQuestion : 0
 };
 
 const store = createStore(initialState);
