@@ -56,5 +56,3 @@ const initialState = {
 const store = createStore(initialState);
 
 export default store;
-
-// https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg

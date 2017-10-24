@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from 'redux-zero/react';
 import plane from "./img/plane.svg";
 import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
-import {next, prev, saveNext} from './Actions'
+import {next, prev, saveNext, reset, checkQuestions} from './Actions'
 
 const Head = ({image}) => {
   return (
@@ -28,7 +28,7 @@ const Progress = ({totalAnswers, totalQuestions}) => {
   );
 }
 
-const Quiz = ({question, options}) => {
+const Quiz = ({question, options, answered}) => {
   return (
     <div>
       <Row>
@@ -42,7 +42,6 @@ const Quiz = ({question, options}) => {
         </Col>      
       </Row>
     </div>
-    
   );
 }
 
@@ -82,7 +81,25 @@ const Navs = ({answers, actualQuestion }) => {
 
 }
 
-const App = ({questions, selected, answers, actualQuestion}) => {
+const Resume = ({check, correct, questions, userAnswers}) => {
+  <Row>
+    <Col md={12} className='pregunta'>
+      <h1 className="titulo">
+        {!check && 'Estas son tus respuestas'}
+        {check && correct + 'de ' + questions.length + 'correctas!!'}
+      </h1>
+      <div>
+        <span>{userAnswers}</span>
+      </div>
+      <div className='text-center'>
+        {!check && <button className='btn btn-default btn-lg' onClick={reset}>Start Again</button>} }
+        {check && <button className='btn btn-default btn-lg' onClick={checkQuestions}>Enviar</button>}
+      </div>
+    </Col>
+  </Row>
+}
+
+const App = ({questions, answers, actualQuestion, correct, check, answered}) => {
   
   const items = questions[actualQuestion].options.map((choise, index) => {
     const abc = ["A", "B", "C"];
@@ -100,20 +117,40 @@ const App = ({questions, selected, answers, actualQuestion}) => {
         </Col>
       </Row>
     );
-  })
+  });
+
+  const totalAnswers = answers.map((user, indexAns) => {
+    if(user == questions[indexAns].correct && check){
+      return <p className="text-success">{indexAns + 1}. {questions[indexAns].question}<strong> {user}</strong></p>
+    } else if (check){
+      return <p className="text-danger">{indexAns + 1}. {questions[indexAns].question}<strong><strike> {user}</strike> {questions[indexAns].correct}</strong></p>
+    } else {
+      return <p>{indexAns + 1}. {questions[indexAns].question}<strong> {user}</strong></p>;
+    }
+  });
+
   return (
     <Grid className='quiz text-center'>
-      <Head image={questions[actualQuestion].img}/>
-      <Progress totalAnswers={answers.length} totalQuestions={questions.length}  />
+      <div>
+        {! answered && <Head image={questions[actualQuestion].img}/>}
+        {answered && <Head image={"https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg"}/>} 
+      </div>
+      <Progress totalAnswers={answers.length} totalQuestions={questions.length} />
       <div className="pregunta">
-        <Quiz question={questions[actualQuestion].question} options={items} />
+        {! answered && 
+          <Quiz question={questions[actualQuestion].question} options={items} /> }
+        {answered &&  
+          <Resume check={check} correct={correct} questions={questions} userAnswers={totalAnswers} />}
         <Socials />
       </div>
-      <Navs answers={answers.length} actualQuestion={actualQuestion} />
+      {!check && questions.length != 0 && 
+        <Navs answers={answers.length} actualQuestion={actualQuestion} />
+      }
+     
     </Grid>
   );
 }
 
-const mapToProps = ({questions, answers, actualQuestion}) => ({questions, answers, actualQuestion});
+const mapToProps = ({questions, answers, actualQuestion, correct, check, answered}) => ({questions, answers, actualQuestion, correct, check, answered});
 
 export default connect(mapToProps)(App);

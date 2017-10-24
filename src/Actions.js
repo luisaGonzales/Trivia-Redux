@@ -12,6 +12,8 @@ export const next = () => {
         store.setState({
             answered: true
         });
+        console.log("condicion");
+        console.log(store.getState().answered);
     } else if (answered){
         actualQ++;
     }
@@ -19,6 +21,7 @@ export const next = () => {
     store.setState({
         actualQuestion : actualQ
     });
+    
 
 }
 
