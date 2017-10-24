@@ -39,12 +39,12 @@ const App = ({questions, answers, actualQuestion, correct, check, answered}) => 
   return (
     <Grid className='quiz text-center'>
       <div>
-        {! answered && <Head image={questions[actualQuestion].img}/>}
+        {!answered && <Head image={questions[actualQuestion].img}/>}
         {answered && <Head image={"https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg"}/>} 
       </div>
       <Progress totalAnswers={answers.length} totalQuestions={questions.length} />
       <div className="pregunta">
-        {! answered && 
+        {!answered && 
           <Quiz question={questions[actualQuestion].question} options={items} /> }
         {answered &&  
           <Resume check={check} correct={correct} questions={questions} userAnswers={totalAnswers} />}

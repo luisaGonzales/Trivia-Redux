@@ -79,19 +79,21 @@ export const Socials = () => {
   }
 
   export const Resume = ({check, correct, questions, userAnswers}) => {
-    <Row>
-      <Col md={12} className='pregunta'>
-        <h1 className="titulo">
-          {!check && 'Estas son tus respuestas'}
-          {check && correct + 'de ' + questions.length + 'correctas!!'}
-        </h1>
-        <div>
-          <span>{userAnswers}</span>
-        </div>
-        <div className='text-center'>
-          {!check && <button className='btn btn-default btn-lg' onClick={reset}>Start Again</button>} }
-          {check && <button className='btn btn-default btn-lg' onClick={checkQuestions}>Enviar</button>}
-        </div>
-      </Col>
-    </Row>
+      return (
+        <Row>
+            <Col md={12} className='pregunta'>
+            <h1 className="titulo">
+                {!check && 'Estas son tus respuestas'}
+                {check && correct + 'de ' + questions.length + 'correctas!!'}
+            </h1>
+            <div>
+                <span>{userAnswers}</span>
+            </div>
+            <div className='text-center'>
+                {check && <button className='btn btn-default btn-lg' onClick={reset}>Start Again</button>} }
+                {!check && <button className='btn btn-default btn-lg' onClick={checkQuestions}>Enviar</button>}
+            </div>
+            </Col>
+        </Row>
+    );    
   }
