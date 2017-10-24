@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from 'redux-zero/react';
 import plane from "./img/plane.svg";
 import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
-import {next} from './Actions'
+import {next, saveNext} from './Actions'
 
 const Head = ({image}) => {
   return (
@@ -22,7 +22,7 @@ const Progress = ({totalAnswers, totalQuestions}) => {
       <div>
         {totalAnswers} de {totalQuestions} preguntas contestadas
       </div>
-      <ProgressBar now={{totalAnswers} * 20} />
+      <ProgressBar now={totalAnswers * 20} />
     </Col>
   </Row>
   );
@@ -92,7 +92,7 @@ const App = ({questions, selected, answers, actualQuestion}) => {
           <button
             className='btn btn-block btn-abc text-center opciones'
             id={index}
-            onClick={() => next(choise)}
+            onClick={() => saveNext(choise)}
             >
               <span>{abc[index]}</span> {choise}
             <span className="seleccion"></span>
