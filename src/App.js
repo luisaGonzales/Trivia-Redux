@@ -7,18 +7,17 @@ import {next, prev, saveNext, reset, checkQuestions} from './Actions'
 import {Head, Progress, Quiz, Socials, Navs, Resume} from './Component'
 
 const App = ({questions, answers, actualQuestion, correct, check, answered}) => {
-  
   const items = questions[actualQuestion].options.map((choise, index) => {
     const abc = ["A", "B", "C"];
     return (
       <Row className="text-center">
-        <Col md={12} className='seleccionado' >
+        <Col md={12} >
           <button
             className='btn btn-block btn-abc text-center opciones'
             id={index}
             onClick={() => saveNext(choise)}
             >
-              <span>{abc[index]}</span> {choise}
+              <span className="abc pull-left">{abc[index]}</span> {choise}
             <span className="seleccion"></span>
           </button>
         </Col>
@@ -42,7 +41,9 @@ const App = ({questions, answers, actualQuestion, correct, check, answered}) => 
         {!answered && <Head image={questions[actualQuestion].img}/>}
         {answered && <Head image={"https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg"}/>} 
       </div>
-      <Progress totalAnswers={answers.length} totalQuestions={questions.length} />
+      <div>
+        {!check && <Progress totalAnswers={answers.length} totalQuestions={questions.length} />}
+      </div>
       <div className="pregunta">
         {!answered && 
           <Quiz question={questions[actualQuestion].question} options={items} /> }

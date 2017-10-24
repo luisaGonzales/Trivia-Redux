@@ -51,8 +51,6 @@ export const saveNext = (value) => {
     let t = setTimeout(() => {
         next();
     }, 900);
-    // console.log(store.getState().answers);
-    // console.log(store.getState().correct)
 }
 
 export const checkQuestions = () => {

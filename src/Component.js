@@ -8,6 +8,12 @@ export const Head = ({image}) => {
         <Col mdOffset={3}  md={6} mdOffset={3}>
           <img src={image} alt="imagen"/>
         </Col>
+        <Col md={3}>
+            <span className="fa-stack fa-lg pinkinfo ">
+                  <i className="fa fa-circle fa-stack-2x info"></i>
+                  <i class="fa fa-info" aria-hidden="true"></i>
+            </span>
+        </Col>
       </Row>
     );
 }
@@ -81,7 +87,7 @@ export const Socials = () => {
   export const Resume = ({check, correct, questions, userAnswers}) => {
       return (
         <Row>
-            <Col md={12} className='pregunta'>
+            <Col md={12}>
             <h1 className="titulo">
                 {!check && 'Estas son tus respuestas'}
                 {check && correct + 'de ' + questions.length + 'correctas!!'}
@@ -90,8 +96,8 @@ export const Socials = () => {
                 <span>{userAnswers}</span>
             </div>
             <div className='text-center'>
-                {check && <button className='btn btn-default btn-lg' onClick={reset}>Start Again</button>} }
                 {!check && <button className='btn btn-default btn-lg' onClick={checkQuestions}>Enviar</button>}
+                {check && <button className='btn btn-default btn-lg' onClick={reset}>Start Again</button>}
             </div>
             </Col>
         </Row>
