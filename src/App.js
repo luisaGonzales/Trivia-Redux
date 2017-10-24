@@ -3,7 +3,7 @@ import './App.css';
 import {connect} from 'redux-zero/react';
 import plane from "./img/plane.svg";
 import {Grid, Row, Col, ProgressBar} from 'react-bootstrap';
-import {next, saveNext} from './Actions'
+import {next, prev, saveNext} from './Actions'
 
 const Head = ({image}) => {
   return (
@@ -70,10 +70,10 @@ const Socials = () => {
 const Navs = ({answers, actualQuestion }) => {
   return (
     <div id="flechas" className="text-center">
-      <button id="anterior" className={{answers} >=  {actualQuestion} && {actualQuestion}?'btn':"btn disabled"}>
+      <button id="anterior" className={{answers} >=  {actualQuestion} && {actualQuestion}?'btn':"btn disabled"} onClick={prev}>
             <img className="img-responsive" src='https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/navigation-left-arrow.svg' />
       </button>
-      <button id="siguiente" className={{answers} >  {actualQuestion} ? 'btn':"btn disabled"} >
+      <button id="siguiente" className={{answers} >  {actualQuestion} ? 'btn':"btn disabled"} onClick={next}>
             <img className="img-responsive" src="https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/navigation-right-arrow.svg" />
       </button>
     </div>
@@ -109,12 +109,11 @@ const App = ({questions, selected, answers, actualQuestion}) => {
         <Quiz question={questions[actualQuestion].question} options={items} />
         <Socials />
       </div>
-      
-      
+      <Navs answers={answers.length} actualQuestion={actualQuestion} />
     </Grid>
   );
 }
 
-const mapToProps = ({questions, selected, answers, actualQuestion}) => ({questions, selected, answers, actualQuestion});
+const mapToProps = ({questions, answers, actualQuestion}) => ({questions, answers, actualQuestion});
 
 export default connect(mapToProps)(App);
